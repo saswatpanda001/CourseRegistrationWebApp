@@ -92,26 +92,34 @@ namespace CourseManagementWebApp.Controllers
         }
 
 
-        public IActionResult Dashboard()
+
+        public async Task<IActionResult> Dashboard()
         {
+            // Check if the user is logged in
             if (SessionManager.LoggedInUser == null)
             {
                 return RedirectToAction("Login", "Account");
             }
 
-            var user = SessionManager.LoggedInUser;
+            var userId = SessionManager.LoggedInUser.UserId;
 
-         
-            var enrollments = _context.Enrollments
-                                        .Include(a => a.Course)
-                                        .Where(a => a.UserId == user.UserId)
-                                        .ToList();
+            // Fetch the user data asynchronously
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
 
+            // Fetch the enrollments asynchronously
+            var enrollments = await _context.Enrollments
+                                             .Include(a => a.Course)
+                                             .Where(a => a.UserId == userId)
+                                             .ToListAsync();
+
+            // Pass the user and enrollments to the view
             ViewBag.User = user;
             ViewBag.Enrollments = enrollments;
 
             return View();
         }
+
+
 
 
         public IActionResult AdminDashboard()
@@ -251,56 +259,68 @@ namespace CourseManagementWebApp.Controllers
             return View(SessionManager.LoggedInUser);
         }
 
-        // POST: EditProfile
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditProfile(User user)
         {
-
             if (!ModelState.IsValid)
             {
-                return View(user);  // Return the form with validation errors
-            }
-
-            try
-            {
-
-                // Check if the email is already used by another user (excluding the current user's email)
-                var isEmailTaken = await _context.Users
-                    .AnyAsync(u => u.Email == user.Email && u.UserId != SessionManager.LoggedInUser.UserId);
-
-                if (isEmailTaken)
-                {
-                    ModelState.AddModelError("Email", "This email is already in use by another user.");
-                    return View(user);
-                }
-
-                // Check if the phone number is already used by another user (excluding the current user's phone number)
-                var isPhoneTaken = await _context.Users
-                    .AnyAsync(u => u.Phone == user.Phone && u.UserId !=SessionManager.LoggedInUser.UserId);
-
-                if (isPhoneTaken)
-                {
-                    ModelState.AddModelError("Phone", "This phone number is already in use by another user.");
-                    return View(user);
-                }
-                user.Password = SessionManager.LoggedInUser.Password;
-
-
-
-
-
-                _context.Update(user);
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction("EditProfile","Account");  // Redirect to profile after saving
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("", $"An error occurred: {ex.Message}");
                 return View(user);
             }
+
+            // Check if the email is already in use by another user (excluding the current user's email)
+            var isEmailTaken = await _context.Users
+                .AnyAsync(u => u.Email == user.Email && u.UserId != SessionManager.LoggedInUser.UserId);
+
+            if (isEmailTaken)
+            {
+                ModelState.AddModelError("Email", "This email is already in use by another user.");
+                return View(user);
+            }
+
+            // Check if the phone number is already in use by another user (excluding the current user's phone number)
+            var isPhoneTaken = await _context.Users
+                .AnyAsync(u => u.Phone == user.Phone && u.UserId != SessionManager.LoggedInUser.UserId);
+
+            if (isPhoneTaken)
+            {
+                ModelState.AddModelError("Phone", "This phone number is already in use by another user.");
+                return View(user);
+            }
+
+            // If email is the same, don't update it.
+            var existingUser = await _context.Users.FindAsync(SessionManager.LoggedInUser.UserId);
+
+            if (existingUser != null)
+            {
+                // Only update the fields that are different
+                if (existingUser.Email != user.Email)
+                {
+                    existingUser.Email = user.Email;
+                }
+
+                if (existingUser.Phone != user.Phone)
+                {
+                    existingUser.Phone = user.Phone;
+                }
+
+                // You can do this for any other fields that you want to ensure are updated
+                existingUser.Name = user.Name;
+                existingUser.Password = user.Password;
+                existingUser.Address = user.Address;
+
+                // Mark the entity as modified and save changes
+                _context.Update(existingUser);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Dashboard","Account"); // Redirect to the profile page
+            }
+
+            // If no user was found, return the view with the user object
+            return View(user);
         }
+
+
+
 
 
 

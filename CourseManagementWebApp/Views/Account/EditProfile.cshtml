@@ -1,54 +1,76 @@
 ﻿@model CourseManagementWebApp.Models.User
 @{
-    ViewData["Title"] = "EditProfile";
+    ViewData["Title"] = "Edit Profile";
 }
 
-<h2>Edit Profile</h2>
+<h2 class="text-3xl font-semibold text-center mb-6">Edit Profile</h2>
 
-<form asp-controller="Account" asp-action="EditProfile" method="post">
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+<form asp-controller="Account" asp-action="EditProfile" method="post" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg">
+
+    <div class="form-group mb-4">
+        <label asp-for="Name" class="block text-sm font-medium text-gray-700">Name</label>
+        <input asp-for="Name" class="form-control mt-2 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your name" />
+        <span asp-validation-for="Name" class="text-sm text-red-500"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" readonly />
-        <span asp-validation-for="Email" class="text-danger"></span>
+    <div class="form-group mb-4">
+        <label asp-for="Email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input asp-for="Email" class="form-control mt-2 p-2 w-full border border-gray-300 rounded-md bg-gray-100 cursor-not-allowed" readonly />
+        <span asp-validation-for="Email" class="text-sm text-red-500"></span>
     </div>
 
-
-
-
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" type="password" class="form-control"/>
-        <span asp-validation-for="Password" class="text-danger"></span>
+    <div class="form-group mb-4">
+        <label asp-for="Password" class="block text-sm font-medium text-gray-700">Password</label>
+        <input asp-for="Password" type="password" class="form-control mt-2 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter a new password" />
+        <span asp-validation-for="Password" class="text-sm text-red-500"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="Role"></label>
-        <input asp-for="Role" class="form-control" readonly />
-        <span asp-validation-for="Role" class="text-danger"></span>
+    <div class="form-group mb-4">
+        <label asp-for="Role" class="block text-sm font-medium text-gray-700">Role</label>
+        <input asp-for="Role" class="form-control mt-2 p-2 w-full border border-gray-300 rounded-md bg-gray-100 cursor-not-allowed" readonly />
+        <span asp-validation-for="Role" class="text-sm text-red-500"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="Phone"></label>
-        <input asp-for="Phone" class="form-control" />
-        <span asp-validation-for="Phone" class="text-danger"></span>
+    <div class="form-group mb-4">
+        <label asp-for="Phone" class="block text-sm font-medium text-gray-700">Phone</label>
+        <input asp-for="Phone" class="form-control mt-2 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your phone number" />
+        <span asp-validation-for="Phone" class="text-sm text-red-500"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="Address"></label>
-        <input asp-for="Address" class="form-control" />
-        <span asp-validation-for="Address" class="text-danger"></span>
+    <div class="form-group mb-6">
+        <label asp-for="Address" class="block text-sm font-medium text-gray-700">Address</label>
+        <input asp-for="Address" class="form-control mt-2 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your address" />
+        <span asp-validation-for="Address" class="text-sm text-red-500"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a asp-action="Profile" class="btn btn-secondary">Cancel</a>
+    <div class="flex justify-between">
+        <button type="submit" class="bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Save</button>
+        <a asp-action="Profile" class="bg-gray-300 text-gray-700 p-3 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500">Cancel</a>
+    </div>
+
 </form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            // Validate the phone number to ensure it is 10 digits long
+            const phoneInput = document.querySelector('[name="Phone"]');
+            const phonePattern = /^[0-9]{10}$/;
+
+            if (!phonePattern.test(phoneInput.value)) {
+                event.preventDefault();
+                alert('Please enter a valid 10-digit phone number.');
+                phoneInput.focus();
+            }
+
+            // Validate the password if it's not empty
+            const passwordInput = document.querySelector('[name="Password"]');
+            if (passwordInput.value && passwordInput.value.length < 6) {
+                event.preventDefault();
+                alert('Password must be at least 6 characters long.');
+                passwordInput.focus();
+            }
+        });
+    </script>
 }
