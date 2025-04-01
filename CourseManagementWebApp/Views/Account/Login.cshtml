@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600">
+    <div class="bg-white shadow-xl rounded-lg p-10 max-w-md w-full">
+        <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6">Welcome to Course Management</h2>
+        <p class="text-center text-gray-600 mb-8">Login to continue</p>
+
+        <form asp-action="Login" method="post" class="space-y-6">
+            <div>
+                <label for="email" class="block text-gray-700 font-semibold">Email</label>
+                <input type="email" id="email" name="email" required
+                       class="w-full px-5 py-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-indigo-300 focus:border-indigo-500 outline-none">
+            </div>
+            <div>
+                <label for="password" class="block text-gray-700 font-semibold">Password</label>
+                <input type="password" id="password" name="password" required
+                       class="w-full px-5 py-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-indigo-300 focus:border-indigo-500 outline-none">
+            </div>
+
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <p class="text-red-600 text-sm text-center">@ViewBag.ErrorMessage</p>
+            }
+
+            <button type="submit"
+                    class="w-full bg-gradient-to-r from-teal-500 to-cyan-400 text-white py-3 rounded-lg hover:from-teal-600 hover:to-cyan-500 transition duration-200">
+                Login
+            </button>
+        </form>
+
+        <p class="text-center text-gray-600 mt-6">
+            Don't have an account?
+            <a href="/Account/Signup" class="text-teal-500 font-semibold hover:text-teal-600 transition duration-200">Sign up</a>
+        </p>
+    </div>
+</div>

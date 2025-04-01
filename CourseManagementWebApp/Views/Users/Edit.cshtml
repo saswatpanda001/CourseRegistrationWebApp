@@ -1,0 +1,75 @@
+﻿@model CourseManagementWebApp.Models.User
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="min-h-screen bg-gray-100 p-8">
+    <h1 class="text-4xl font-bold text-gray-900 mb-6">Edit User</h1>
+
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-3xl mx-auto">
+        <h4 class="text-xl font-semibold text-gray-800 mb-4">User Information</h4>
+        <hr class="mb-6" />
+
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+            <input type="hidden" asp-for="UserId" />
+
+            <!-- Name Field -->
+            <div class="form-group mb-4">
+                <label asp-for="Name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input asp-for="Name" class="form-input mt-1 p-2 border border-gray-300 rounded-lg w-full" />
+                <span asp-validation-for="Name" class="text-danger text-sm mt-1"></span>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group mb-4">
+                <label asp-for="Email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input asp-for="Email" class="form-input mt-1 p-2 border border-gray-300 rounded-lg w-full" />
+                <span asp-validation-for="Email" class="text-danger text-sm mt-1"></span>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group mb-4">
+                <label asp-for="Password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input asp-for="Password" class="form-input mt-1 p-2 border border-gray-300 rounded-lg w-full" />
+                <span asp-validation-for="Password" class="text-danger text-sm mt-1"></span>
+            </div>
+
+            <!-- Role Field -->
+            <div class="form-group mb-4">
+                <label asp-for="Role" class="block text-sm font-medium text-gray-700">Role</label>
+                <input asp-for="Role" class="form-input mt-1 p-2 border border-gray-300 rounded-lg w-full" />
+                <span asp-validation-for="Role" class="text-danger text-sm mt-1"></span>
+            </div>
+
+            <!-- Phone Field -->
+            <div class="form-group mb-4">
+                <label asp-for="Phone" class="block text-sm font-medium text-gray-700">Phone</label>
+                <input asp-for="Phone" class="form-input mt-1 p-2 border border-gray-300 rounded-lg w-full" />
+                <span asp-validation-for="Phone" class="text-danger text-sm mt-1"></span>
+            </div>
+
+            <!-- Address Field -->
+            <div class="form-group mb-4">
+                <label asp-for="Address" class="block text-sm font-medium text-gray-700">Address</label>
+                <input asp-for="Address" class="form-input mt-1 p-2 border border-gray-300 rounded-lg w-full" />
+                <span asp-validation-for="Address" class="text-danger text-sm mt-1"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group mb-4">
+                <input type="submit" value="Save" class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 cursor-pointer w-full" />
+            </div>
+        </form>
+
+        <!-- Back to List Link -->
+        <div class="mt-6 text-center">
+            <a asp-action="Index" class="text-blue-500 hover:text-blue-600 text-lg">Back to List</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

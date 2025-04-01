@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    var user = ViewBag.User as CourseManagementWebApp.Models.User;
+    var enrollments = ViewBag.Enrollments as List<CourseManagementWebApp.Models.Enrollment>
+    ;
+    }
+
+    <div class="min-h-screen bg-gradient-to-r from-blue-500 to-teal-500 p-6">
+        <div class="max-w-6xl mx-auto space-y-12">
+            <!-- Welcome Card -->
+            <div class="bg-white shadow-xl rounded-xl p-8 mb-8 transform hover:scale-105 transition-all">
+                <h2 class="text-3xl font-semibold text-gray-800">Welcome, @user.Name! 👋</h2>
+                <p class="text-gray-600 mt-2">Manage your enrollments and explore our Courses.</p>
+
+                <div class="mt-6 flex space-x-6">
+                    <a href="@Url.Action("ShowEnrollments", "UserFunctions" )" class="bg-indigo-600 text-white py-2 px-6 rounded-full hover:bg-indigo-700 transition-all">
+                        View My Enrollments
+                    </a>
+                    <a href="@Url.Action("Logout", "Account" )" class="bg-red-600 text-white py-2 px-6 rounded-full hover:bg-red-700 transition-all">
+                        Logout
+                    </a>
+                </div>
+            </div>
+
+            <!-- User Details Section -->
+            <div class="bg-white shadow-xl rounded-xl p-8 mb-8 transform hover:scale-105 transition-all">
+                <h3 class="text-2xl font-semibold text-gray-800">Your Details</h3>
+                <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <div class="flex flex-col space-y-2">
+                        <p><strong>Name:</strong> @user.Name</p>
+                        <p><strong>Email:</strong> @user.Email</p>
+                        <p><strong>Phone:</strong> @user.Phone</p>
+                        <p><strong>Address:</strong> @user.Address</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enrollments Section -->
+            <div class="bg-white shadow-xl rounded-xl p-8 transform hover:scale-105 transition-all">
+                <h3 class="text-2xl font-semibold text-gray-800">Your Enrollments</h3>
+                @if (enrollments == null || !enrollments.Any())
+                {
+                <p class="text-gray-500 mt-4">No enrollments found. Book one now!</p>
+                }
+                else
+                {
+                <div class="overflow-x-auto mt-6">
+                    <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-sm">
+                        <thead class="bg-gray-200">
+                            <tr>
+                                <th class="py-3 px-6 text-left text-sm font-semibold text-gray-700">Course Name</th>
+                                <th class="py-3 px-6 text-left text-sm font-semibold text-gray-700">Booking Date</th>
+                                <th class="py-3 px-6 text-left text-sm font-semibold text-gray-700">Start Date</th>
+                                <th class="py-3 px-6 text-left text-sm font-semibold text-gray-700">End Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var enrollment in enrollments)
+                            {
+                            <tr class="hover:bg-gray-50 transition-all">
+                                <td class="py-3 px-6 text-sm text-gray-700 border-b">@enrollment.Course.CourseName</td>
+                                <td class="py-3 px-6 text-sm text-gray-700 border-b">@enrollment.EnrollmentDate.ToString("yyyy-MM-dd")</td>
+                                <td class="py-3 px-6 text-sm text-gray-700 border-b">@enrollment.Course.StartDate.ToString("yyyy-MM-dd")</td>
+                                <td class="py-3 px-6 text-sm text-gray-700 border-b">@enrollment.Course.EndDate.ToString("yyyy-MM-dd")</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                }
+            </div>
+        </div>
+    </div>

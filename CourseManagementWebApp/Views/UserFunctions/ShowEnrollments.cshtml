@@ -1,0 +1,34 @@
+﻿@model IEnumerable<CourseManagementWebApp.Models.Enrollment>
+
+@{
+    ViewData["Title"] = "My Enrollments";
+}
+
+<h1 class="text-4xl font-semibold text-center my-8 text-gray-800">My Enrollments</h1>
+
+<div class="overflow-x-auto px-4">
+    <table class="min-w-full table-auto border-collapse bg-white rounded-lg shadow-lg overflow-hidden">
+        <thead class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
+            <tr>
+                <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider">Course Name</th>
+                <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider">Enrollment Date</th>
+                <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var enrollment in Model)
+            {
+                <tr class="transition duration-200 hover:bg-gray-100">
+                    <td class="px-6 py-4 text-sm font-medium text-gray-800 border-b border-gray-200">@enrollment.Course.CourseName</td>
+                    <td class="px-6 py-4 text-sm text-gray-600 border-b border-gray-200">@enrollment.EnrollmentDate.ToString("MMMM dd, yyyy")</td>
+                    <td class="px-6 py-4 text-sm font-medium border-b border-gray-200">
+                        <form method="post" asp-action="Delete" asp-route-id="@enrollment.EnrollmentId" onsubmit="return confirm('Are you sure you want to delete this enrollment?');">
+                            <button type="submit" class="text-red-500 hover:text-red-700 transition duration-200 p-2 rounded-lg hover:bg-red-100">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

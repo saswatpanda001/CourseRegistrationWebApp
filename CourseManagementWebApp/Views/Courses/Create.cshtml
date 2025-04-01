@@ -1,0 +1,55 @@
+﻿@model CourseManagementWebApp.Models.Course
+
+@{
+    ViewData["Title"] = "Create Course";
+}
+
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white shadow-md rounded-lg p-8 max-w-lg w-full">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Create a New Course</h1>
+
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-red-500 mb-4"></div>
+
+            <!-- Course Name -->
+            <div class="mb-4">
+                <label asp-for="CourseName" class="block text-sm font-medium text-gray-700">Course Name</label>
+                <input asp-for="CourseName" class="mt-1 block w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="CourseName" class="text-red-500 text-sm"></span>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-4">
+                <label asp-for="Description" class="block text-sm font-medium text-gray-700">Description</label>
+                <textarea asp-for="Description" class="mt-1 block w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 h-24 resize-none"></textarea>
+                <span asp-validation-for="Description" class="text-red-500 text-sm"></span>
+            </div>
+
+            <!-- Start Date -->
+            <div class="mb-4">
+                <label asp-for="StartDate" class="block text-sm font-medium text-gray-700">Start Date</label>
+                <input asp-for="StartDate" type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="StartDate" class="text-red-500 text-sm"></span>
+            </div>
+
+            <!-- End Date -->
+            <div class="mb-4">
+                <label asp-for="EndDate" class="block text-sm font-medium text-gray-700">End Date</label>
+                <input asp-for="EndDate" type="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="EndDate" class="text-red-500 text-sm"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-between items-center">
+                <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
+                    Create Course
+                </button>
+                <a asp-action="Index" class="text-blue-500 hover:underline">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CourseManagementWebApp.Models.Course>
+
+@{
+    ViewData["Title"] = "Courses";
+}
+
+<div class="min-h-screen bg-gray-50 p-8">
+    <h1 class="text-4xl font-bold text-blue-600 mb-6">Courses</h1>
+
+    <!-- Create New Button -->
+    <a asp-action="Create" class="inline-block mb-6 bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition duration-300">Create New Course</a>
+
+    <!-- Table Design -->
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden">
+            <thead class="bg-blue-500 text-white">
+                <tr>
+                    <th class="py-3 px-4 text-left">Course Name</th>
+                    <th class="py-3 px-4 text-left">Description</th>
+                    <th class="py-3 px-4 text-left">Start Date</th>
+                    <th class="py-3 px-4 text-left">End Date</th>
+                    <th class="py-3 px-4 text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="border-b hover:bg-gray-50 transition">
+                        <td class="py-4 px-4">@Html.DisplayFor(modelItem => item.CourseName)</td>
+                        <td class="py-4 px-4">@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td class="py-4 px-4">@Html.DisplayFor(modelItem => item.StartDate)</td>
+                        <td class="py-4 px-4">@Html.DisplayFor(modelItem => item.EndDate)</td>
+                        <td class="py-4 px-4 flex justify-center space-x-3">
+                            <a asp-action="Edit" asp-route-id="@item.CourseId" class="text-blue-500 hover:underline">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.CourseId" class="text-green-500 hover:underline">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.CourseId" class="text-red-500 hover:underline">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

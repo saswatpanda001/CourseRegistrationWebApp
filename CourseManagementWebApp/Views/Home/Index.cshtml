@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Course Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-r from-blue-400 to-purple-500 font-sans">
+    <!-- Navbar -->
+    <header class="text-white">
+        <div class="container mx-auto flex justify-between items-center py-5">
+            <h1 class="text-3xl font-bold">Course Management</h1>
+            <nav>
+                <a href="/Account/Login" class="bg-white text-blue-500 hover:bg-blue-600 hover:text-white px-6 py-2 rounded-lg font-semibold">Login</a>
+                <a href="/Account/Signup" class="ml-4 bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-500 px-6 py-2 rounded-lg font-semibold">Register</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="text-center py-20">
+        <h2 class="text-5xl font-extrabold text-white leading-tight">Learn. Explore. Grow.</h2>
+        <p class="text-xl text-white mt-4">Discover thousands of online courses and start your learning journey today.</p>
+        <a href="/Account/Login" class="mt-8 inline-block bg-white text-blue-500 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg text-lg font-semibold">Get Started</a>
+    </section>
+
+    <!-- Features Section -->
+    <section class="bg-white py-16">
+        <div class="container mx-auto">
+            <h3 class="text-4xl font-bold text-center text-blue-500">Why Choose Us?</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+                <!-- Feature 1 -->
+                <div class="text-center p-6 shadow-lg rounded-lg border-t-4 border-blue-500">
+                    <img src="https://cdn-icons-png.flaticon.com/512/201/201614.png" class="w-20 mx-auto mb-4" />
+                    <h4 class="text-2xl font-semibold">Expert Instructors</h4>
+                    <p class="mt-2 text-gray-600">Learn from industry-leading professionals and experienced educators.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="text-center p-6 shadow-lg rounded-lg border-t-4 border-purple-500">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2516/2516389.png" class="w-20 mx-auto mb-4" />
+                    <h4 class="text-2xl font-semibold">Flexible Learning</h4>
+                    <p class="mt-2 text-gray-600">Access courses anytime, anywhere with our flexible learning platform.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="text-center p-6 shadow-lg rounded-lg border-t-4 border-green-500">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2933/2933240.png" class="w-20 mx-auto mb-4" />
+                    <h4 class="text-2xl font-semibold">Certification</h4>
+                    <p class="mt-2 text-gray-600">Get certified and boost your career with recognized credentials.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-gradient-to-r from-purple-500 to-blue-400 text-white text-center">
+        <h3 class="text-4xl font-bold">Ready to Start Learning?</h3>
+        <p class="text-lg mt-4">Sign up now and explore the world of knowledge with us.</p>
+        <a href="/Account/Register" class="mt-8 inline-block bg-white text-blue-500 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg text-lg font-semibold">Join Now</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-gray-800 text-white text-center">
+        <p>&copy; 2024 Course Management Web App. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+﻿@model CourseManagementWebApp.Models.User
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="min-h-screen bg-gray-100 p-8">
+    <h1 class="text-4xl font-bold text-blue-600 mb-6">Create User</h1>
+
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
+        <h4 class="text-xl font-semibold text-gray-800 mb-4">User Information</h4>
+        <hr class="mb-6" />
+
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+            <!-- Name Field -->
+            <div class="mb-4">
+                <label asp-for="Name" class="block text-gray-700 font-medium mb-2">Name</label>
+                <input asp-for="Name" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <span asp-validation-for="Name" class="text-danger text-sm"></span>
+            </div>
+
+            <!-- Email Field -->
+            <div class="mb-4">
+                <label asp-for="Email" class="block text-gray-700 font-medium mb-2">Email</label>
+                <input asp-for="Email" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <span asp-validation-for="Email" class="text-danger text-sm"></span>
+            </div>
+
+            <!-- Password Field -->
+            <div class="mb-4">
+                <label asp-for="Password" class="block text-gray-700 font-medium mb-2">Password</label>
+                <input asp-for="Password" type="password" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <span asp-validation-for="Password" class="text-danger text-sm"></span>
+            </div>
+
+            <!-- Role Field -->
+            <div class="mb-4">
+                <label asp-for="Role" class="block text-gray-700 font-medium mb-2">Role</label>
+                <input asp-for="Role" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <span asp-validation-for="Role" class="text-danger text-sm"></span>
+            </div>
+
+            <!-- Phone Field -->
+            <div class="mb-4">
+                <label asp-for="Phone" class="block text-gray-700 font-medium mb-2">Phone</label>
+                <input asp-for="Phone" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <span asp-validation-for="Phone" class="text-danger text-sm"></span>
+            </div>
+
+            <!-- Address Field -->
+            <div class="mb-4">
+                <label asp-for="Address" class="block text-gray-700 font-medium mb-2">Address</label>
+                <input asp-for="Address" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <span asp-validation-for="Address" class="text-danger text-sm"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mb-4">
+                <input type="submit" value="Create" class="w-full bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+        </form>
+    </div>
+
+    <!-- Back to List Link -->
+    <div class="mt-4">
+        <a asp-action="Index" class="text-blue-500 hover:text-blue-600">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

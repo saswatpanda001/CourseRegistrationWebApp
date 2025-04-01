@@ -1,0 +1,68 @@
+﻿@model List<CourseManagementWebApp.Models.User>
+@{
+    ViewData["Title"] = "Bulk User Deletion";
+}
+
+<div class="min-h-screen bg-gradient-to-r from-blue-100 to-blue-200 p-8">
+    <div class="bg-white shadow-xl rounded-lg p-6">
+        <h2 class="text-3xl font-bold mb-6 text-blue-600">Bulk User Deletion</h2>
+
+        <!-- Notification Messages -->
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 rounded-lg" role="alert">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4 rounded-lg" role="alert">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+
+        <!-- User Deletion Form -->
+        <form asp-action="BulkDelete" method="post">
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-md">
+                    <thead class="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+                        <tr>
+                            <th class="p-4">
+                                <input type="checkbox" id="selectAll" class="w-5 h-5" />
+                            </th>
+                            <th class="p-4">Name</th>
+                            <th class="p-4">Email</th>
+                            <th class="p-4">Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr class="border-b hover:bg-blue-50 transition">
+                                <td class="p-4 text-center">
+                                    <input type="checkbox" name="userIds" value="@user.UserId" class="userCheckbox w-5 h-5" />
+                                </td>
+                                <td class="p-4">@user.Name</td>
+                                <td class="p-4">@user.Email</td>
+                                <td class="p-4">@user.Phone</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Delete Button -->
+            <button type="submit" class="mt-6 bg-red-500 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-red-600 transition-transform transform hover:scale-105">
+                Delete Selected Users
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- JavaScript for Select All Functionality -->
+<script>
+    document.getElementById('selectAll').addEventListener('change', function () {
+        const checkboxes = document.querySelectorAll('.userCheckbox');
+        checkboxes.forEach(checkbox => checkbox.checked = this.checked);
+    });
+</script>

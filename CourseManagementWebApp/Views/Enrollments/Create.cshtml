@@ -1,0 +1,50 @@
+﻿@model CourseManagementWebApp.Models.Enrollment
+
+@{
+    ViewData["Title"] = "Create Enrollment";
+}
+
+<div class="min-h-screen bg-gray-50 p-8">
+    <h1 class="text-4xl font-bold text-blue-600 mb-6">Create Enrollment</h1>
+
+    <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
+        <h4 class="text-xl font-semibold mb-4">Enrollment Details</h4>
+        <hr class="mb-6" />
+
+        <form asp-action="Create" class="space-y-6">
+            <div asp-validation-summary="ModelOnly" class="text-red-500"></div>
+
+            <!-- User Dropdown -->
+            <div>
+                <label asp-for="UserId" class="block text-gray-700 font-medium mb-2">User</label>
+                <select asp-for="UserId" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" asp-items="ViewBag.UserId"></select>
+            </div>
+
+            <!-- Course Dropdown -->
+            <div>
+                <label asp-for="CourseId" class="block text-gray-700 font-medium mb-2">Course</label>
+                <select asp-for="CourseId" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" asp-items="ViewBag.CourseId"></select>
+            </div>
+
+            <!-- Enrollment Date -->
+            <div>
+                <label asp-for="EnrollmentDate" class="block text-gray-700 font-medium mb-2">Enrollment Date</label>
+                <input asp-for="EnrollmentDate" type="date" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <span asp-validation-for="EnrollmentDate" class="text-red-500 text-sm"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <input type="submit" value="Create" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold cursor-pointer transition duration-300" />
+            </div>
+        </form>
+
+        <div class="mt-4">
+            <a asp-action="Index" class="text-blue-500 hover:underline">Back to List</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

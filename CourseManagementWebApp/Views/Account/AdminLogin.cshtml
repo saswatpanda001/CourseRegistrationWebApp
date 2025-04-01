@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "AdminLogin";
+}
+
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-600 via-pink-500 to-red-500">
+    <div class="bg-white shadow-xl rounded-xl p-10 max-w-md w-full">
+        <h2 class="text-3xl font-semibold text-center text-gray-800 mb-4">Admin Login</h2>
+        <p class="text-center text-gray-600 mb-8">Login to access your dashboard</p>
+
+        <form asp-action="AdminLogin" method="post" class="space-y-6">
+            <div>
+                <label for="email" class="block text-gray-700 font-semibold">Email</label>
+                <input type="email" id="email" name="email" required
+                       class="w-full px-5 py-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-purple-300 focus:border-purple-500 outline-none">
+            </div>
+            <div>
+                <label for="password" class="block text-gray-700 font-semibold">Password</label>
+                <input type="password" id="password" name="password" required
+                       class="w-full px-5 py-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-purple-300 focus:border-purple-500 outline-none">
+            </div>
+
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <p class="text-red-600 text-sm text-center">@ViewBag.ErrorMessage</p>
+            }
+
+            <button type="submit"
+                    class="w-full bg-gradient-to-r from-blue-600 to-teal-500 text-white py-3 rounded-lg hover:from-blue-700 hover:to-teal-600 transition duration-200">
+                Login
+            </button>
+        </form>
+
+    </div>
+</div>
